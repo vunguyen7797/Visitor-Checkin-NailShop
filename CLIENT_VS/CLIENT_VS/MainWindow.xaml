@@ -1,0 +1,304 @@
+﻿<Window x:Class="CLIENT_VS.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CLIENT_VS"
+        mc:Ignorable="d"
+        
+      
+        
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize    ="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"   
+        Title="MainWindow" Height="1200" Width="1500" WindowState="Maximized">
+
+    <Grid KeyDown="Button_KeyDown">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <materialDesign:ColorZone Mode="PrimaryMid" MouseDown="Window_MouseDown">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Background="Transparent">
+
+                        <Button Command="{Binding MinimizeWindowCommand}"
+                            CommandParameter="{Binding ElementName=ucControlBar}"
+                            ToolTip="Minimize"
+                            ToolBar.OverflowMode="AsNeeded" Click="Minimize_btt_Click">
+                            <materialDesign:PackIcon Kind="WindowMinimize" Height="20" Width="30" />
+                        </Button>
+
+                        <Button Command="{Binding MaximizeWindowCommand}"
+                            CommandParameter="{Binding ElementName=ucControlBar}"
+                            ToolTip="Maximize"
+                            ToolBar.OverflowMode="AsNeeded" Click="Maximize_btt_Click">
+                            <materialDesign:PackIcon Kind="WindowMaximize" Height="20" Width="30" />
+                        </Button>
+
+                        <Button Command="{Binding CloseWindowCommand}"
+                            CommandParameter="{Binding ElementName=ucControlBar}"
+                            ToolTip="Close"
+                            ToolBar.OverflowMode="AsNeeded" Click="Close_btt_Click">
+                            <materialDesign:PackIcon Kind="Close" Height="20" Width="30"/>
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel DockPanel.Dock="Left"
+                    Orientation="Horizontal">
+                        <ToggleButton
+                    Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />
+                        <TextBlock
+                    VerticalAlignment="Center"
+                        FontSize="15"
+                        FontFamily="Bahnschrift"
+                    Margin="16 0 0 0" 
+                       Text="{Binding Tag, ElementName=ucControlBar}">
+                        </TextBlock>
+                    </StackPanel>
+                </DockPanel>
+            </materialDesign:ColorZone>
+
+        </Grid>
+
+        <materialDesign:Card x:Name="loginCard" Grid.Row="2" Width="1200" Height="900" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="Grid">
+                        <Setter Property="Margin" Value="20 5 20 20"></Setter>
+                    </Style>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" 
+                        x:Name="TexBlockName"
+                        Text="WELCOME TO OUR NAIL SHOP"
+                        FontWeight="Bold"
+                        FontFamily="Bahnschrift"
+                        FontSize="50"
+                        Foreground="Red"
+                        TextAlignment="Center"
+                        HorizontalAlignment="Center" 
+                        Margin="10,10,10,0" 
+                        VerticalAlignment="Top" 
+                        Height="60" 
+                        Width="1100" TextOptions.TextHintingMode="Fixed" RenderTransformOrigin="0.5,0.5"/>
+
+                    <TextBlock Grid.Row="1" 
+                        x:Name="TexBlockCheckin"
+                        Text="CUSTOMER CHECK-IN"
+                        FontFamily="Bahnschrift"
+                        FontSize="45"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        TextAlignment="Center"
+                        HorizontalAlignment="Center" 
+                        Margin="10,10,10,0" 
+                        VerticalAlignment="Top" 
+                        Height="60" 
+                        Width="1100" TextOptions.TextHintingMode="Fixed" RenderTransformOrigin="0.5,0.5"/>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <TextBox
+                        x:Name="NameBox"
+                        Width="500"
+                        FontFamily="Bahnschrift"
+                        
+                        materialDesign:HintAssist.Hint="Full Name"
+                        FontSize="30"/>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <TextBox
+                        x:Name="PhoneBox"
+                        
+                        Width="500"
+                        FontFamily="Bahnschrift"
+                        
+                        materialDesign:HintAssist.Hint="Phone Number"
+                        FontSize="30"/>
+                </Grid>
+
+                <Grid Grid.Row="3">
+                    <TextBox 
+                        IsReadOnly="True"
+                        materialDesign:HintAssist.Hint="CHECK-IN TIME"
+                        FontSize="20"
+                        FontFamily="Bahnschrift"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        TextAlignment="Center"
+                        Name="checkintime" 
+                        Text="{Binding Source={x:Static sys:DateTime.Now},  
+                        StringFormat='hh:mm tt        MMMM dd, yyyy    ',
+                        Mode=OneWay}" Margin="310,0"/>
+                </Grid>
+
+                <Grid Grid.Row="4" Height="auto">
+                    <TreeView
+                        MinWidth="220">
+                        <TreeViewItem
+                            Header="Technician Choices" Width="524" FontFamily="Bahnschrift" FontSize="30">
+                            <TreeViewItem>
+                                <TreeViewItem.Header>
+                                    <StackPanel
+                                        Orientation="Horizontal">
+                                        <CheckBox
+                                            x:Name="check1"
+                                            VerticalAlignment="Center"
+                                            Checked="Handle_Checked"
+                                            Unchecked="Handle_UnChecked"/>
+                                        <TextBlock
+                                            x:Name="tech1"
+                                            Margin="8 0 0 0" Text="Any Technician">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </TreeViewItem.Header>
+                            </TreeViewItem>
+                            
+                            <TreeViewItem>
+                                <TreeViewItem.Header>
+                                    <StackPanel
+                                        Orientation="Horizontal">
+                                        <CheckBox
+                                            x:Name="check2"
+                                            VerticalAlignment="Center"
+                                            IsChecked="False" />
+                                        <TextBlock
+                                             x:Name="tech2"
+                                            Margin="8 0 0 0" Text="Andy">
+                                                
+                                        </TextBlock>
+                                    </StackPanel>
+                                </TreeViewItem.Header>
+                            </TreeViewItem>
+                            
+                            <TreeViewItem>
+                                <TreeViewItem.Header>
+                                    <StackPanel
+                                        Orientation="Horizontal">
+                                        <CheckBox
+                                            x:Name="check3"
+                                            VerticalAlignment="Center"
+                                            IsChecked="false" />
+                                        <TextBlock
+                                             x:Name="tech3"
+                                            Margin="8 0 0 0" Text="Donny">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </TreeViewItem.Header>
+                            </TreeViewItem>
+
+                            <TreeViewItem>
+                                <TreeViewItem.Header>
+                                    <StackPanel
+                                        Orientation="Horizontal">
+                                        <CheckBox
+                                            x:Name="check4"
+                                            VerticalAlignment="Center"
+                                            IsChecked="false" />
+                                        <TextBlock
+                                             x:Name="tech4"
+                                            Margin="8 0 0 0" Text="Louis">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </TreeViewItem.Header>
+                            </TreeViewItem>
+
+                            <TreeViewItem>
+                                <TreeViewItem.Header>
+                                    <StackPanel
+                                        Orientation="Horizontal">
+                                        <CheckBox
+                                            x:Name="check5"
+                                            VerticalAlignment="Center"
+                                            IsChecked="false" />
+                                        <TextBlock
+                                            x:Name="tech5"
+                                            Margin="8 0 0 0" Text="Michael">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </TreeViewItem.Header>
+                            </TreeViewItem>
+
+                            <TreeViewItem>
+                                <TreeViewItem.Header>
+                                    <StackPanel
+                                        Orientation="Horizontal">
+                                        <CheckBox
+                                            x:Name="check6"
+                                            VerticalAlignment="Center"
+                                            IsChecked="false" />
+                                        <TextBlock
+                                            x:Name="tech6"
+                                            Margin="8 0 0 0" Text="Hannah">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </TreeViewItem.Header>
+                            </TreeViewItem>
+                            
+                        </TreeViewItem>
+                    </TreeView>
+
+                </Grid>
+
+                <Grid Grid.Row="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0"
+                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                        Width="150"
+                        Height="50"  
+                        FontSize="25"
+                        FontFamily="Bahnschrift"
+                        ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Click="Send_btt_Click" >
+                        _SEND
+                    </Button>
+
+                    <Button Grid.Column="1"
+                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                        Width="150"
+                        Height="50"
+                        Background="White"
+                        Foreground="Black"
+                        FontSize="25"
+                        FontFamily="Bahnschrift"
+                        ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Click="Exit_btt_Click">
+                        _EXIT
+                    </Button>
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
+
+
+
+
+    </Grid>
+</Window>

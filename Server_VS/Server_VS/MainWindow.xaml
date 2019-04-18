@@ -1,0 +1,166 @@
+﻿<Window x:Class="Server_VS.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Server_VS"
+        mc:Ignorable="d"
+        ContentRendered="Window_Shown"
+        
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        
+        Title="DashBoardWindow" Height="1000" Width="1500" WindowState="Maximized">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <materialDesign:ColorZone Mode="PrimaryMid" MouseDown="Window_MouseDown">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Background="Transparent">
+
+                        <Button Command="{Binding MinimizeWindowCommand}"
+                            CommandParameter="{Binding ElementName=ucControlBar}"
+                            ToolTip="Minimize"
+                            ToolBar.OverflowMode="AsNeeded" Click="Minimize_btt_Click">
+                            <materialDesign:PackIcon Kind="WindowMinimize" Height="20" Width="30" />
+                        </Button>
+
+                        <Button Command="{Binding MaximizeWindowCommand}"
+                            CommandParameter="{Binding ElementName=ucControlBar}"
+                            ToolTip="Maximize"
+                            ToolBar.OverflowMode="AsNeeded" Click="Maximize_btt_Click">
+                            <materialDesign:PackIcon Kind="WindowMaximize" Height="20" Width="30" />
+                        </Button>
+
+                        <Button Command="{Binding CloseWindowCommand}"
+                            CommandParameter="{Binding ElementName=ucControlBar}"
+                            ToolTip="Close"
+                            ToolBar.OverflowMode="AsNeeded" Click="Close_btt_Click">
+                            <materialDesign:PackIcon Kind="Close" Height="20" Width="30"/>
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel DockPanel.Dock="Left"
+                    Orientation="Horizontal">
+                        <ToggleButton
+                    Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />
+                        <TextBlock
+                    VerticalAlignment="Center"
+                        FontSize="15"
+                        FontFamily="Bahnschrift"
+                    Margin="16 0 0 0" 
+                       Text="{Binding Tag, ElementName=ucControlBar}">
+                        </TextBlock>
+                    </StackPanel>
+                </DockPanel>
+            </materialDesign:ColorZone>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="AUTO"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Grid.Row="0" 
+                        x:Name="TexBlockNewCus"
+                        Text="NEW VISITOR"
+                        FontFamily="Bahnschrift"
+                        FontSize="45"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        TextAlignment="Center"
+                        HorizontalAlignment="Center" 
+                        Margin="102,30,98,0" 
+                        VerticalAlignment="Top" 
+                        Height="60" 
+                        Width="1100" TextOptions.TextHintingMode="Fixed"/>
+
+            <Grid Grid.Row="1" Margin="0,40,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBox Grid.Column="0"
+                        x:Name="NameBox"
+                        Width="500"
+                        FontFamily="Bahnschrift"
+                        FontSize="30"
+                        materialDesign:HintAssist.Hint="Full Name" />
+
+                <TextBox Grid.Column="1"
+                        x:Name="PhoneBox"
+                        Width="500"
+                        FontFamily="Bahnschrift"
+                        FontSize="30"
+                        materialDesign:HintAssist.Hint="Phone Number"/>
+
+                <TextBox Grid.Column="2"
+                        x:Name="DateBox"
+                        Width="500"
+                        FontFamily="Bahnschrift"
+                        FontSize="30"
+                        materialDesign:HintAssist.Hint="Check-in Time"/>
+
+                <TextBox Grid.Column="3"
+                        x:Name="TechBox"
+                        Width="500"
+                        FontFamily="Bahnschrift"
+                        FontSize="30"
+                        materialDesign:HintAssist.Hint="Technician choices"/>
+
+            </Grid>
+                
+        </Grid>
+        <Grid Grid.Row="2">
+            <materialDesign:Card Height="750" Width="1500" Margin="0,40,0,0">
+            
+            <ListView
+                x:Name="ListView"
+                FontSize="23">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn
+                            DisplayMemberBinding="{Binding FullName}"
+                            Header="Full Name"  Width="350"/>
+                        <GridViewColumn
+                            DisplayMemberBinding="{Binding PhoneNumber}"
+                            Header="Phone Number"
+                            Width="300"/>
+                        <GridViewColumn
+                            DisplayMemberBinding="{Binding CheckinTime}"
+                            Header="Check-in Time" Width="400"/>
+                        <GridViewColumn
+                            DisplayMemberBinding="{Binding TechChoices}"
+                            Header="Techinician Choices" Width="auto"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            </materialDesign:Card>
+        </Grid>
+        
+
+
+    </Grid>
+</Window>
